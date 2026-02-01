@@ -17,41 +17,39 @@ def change_colour(button):
 
 window = tk.Tk()
 window.title('Card counter')
-window.resizable(False, False)
 
-# creating the frames of all suits and rank in the form of a matrix
-
-master_frame = ttk.Frame(master = window, padding = padd)
+# Create the main frame
+master_frame = ttk.Frame(master=window, padding=padd)
 master_frame.pack()
 
+# Create frames and buttons in a grid
 for row in range(len(ranks)):
     for col in range(len(suits)):
-        frame = ttk.Frame(
-            master = master_frame,
-            borderwidth = 1,
-            width = cell_width,
-            height = cell_height
-        )
-        frame.grid(row = row, column = col, padx = 2, pady = 2)
-        frame.pack_propagate(False)
-
-        button = tk.Button(
+        # Create a container frame for each cell
+        cell_frame = ttk.Frame(
             master=master_frame,
+            width=cell_width,
+            height=cell_height
+        )
+        cell_frame.grid(row=row, column=col, padx=2, pady=2)
+        cell_frame.pack_propagate(False)
+        
+        # Create button inside the cell frame
+        button = tk.Button(
+            master=cell_frame,  # Important: button goes inside cell_frame
             text=f'{ranks[row]}{suits[col]}',
             bg="#7BB274",
             fg="white",
             font=("Arial", 12),
-            width=6,
-            height=3,
-            command=lambda r=row, c=col, btn=None: None
+            command=lambda btn=None: None
         )
         button.configure(command=lambda b=button: change_colour(b))
-        button.grid(row=row, column=col, padx=2, pady=2)
+        button.pack(fill=tk.BOTH, expand=True)  # Fill the cell frame
 
-
-window_width  = 2 * padd + len(suits) * (cell_width  + 18)
-window_height = 2 * padd + len(ranks) * (cell_height + 22)
+window_width = 2 * padd + len(suits) * (cell_width + 4)  # +4 for grid padding
+window_height = 2 * padd + len(ranks) * (cell_height + 4)
 
 window.geometry(f"{window_width}x{window_height}")
+window.resizable(False, False)
 
 window.mainloop()
