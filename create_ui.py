@@ -4,7 +4,7 @@ from tkinter import ttk
 cell_width = 50
 cell_height = 50
 padd = 10
-
+    
 suits = ['♣', '♦', '♥', '♠']
 ranks = ['A', 'K', 'Q', 'J', '10']
 
@@ -42,7 +42,7 @@ for row in range(len(ranks)):
         button.configure(command=lambda b=button: change_colour(b))
         button.pack(fill = tk.BOTH, expand = True)
 
-window_width = 2 * padd + len(suits) * (cell_width + 4)  # +4 for grid padding
+window_width  = 2 * padd + len(suits) * (cell_width  + 4)  # +4 for grid padding
 window_height = 2 * padd + len(ranks) * (cell_height + 4)
 
 window.geometry(f"{window_width}x{window_height}")
